@@ -1,20 +1,20 @@
 <?php
 namespace App\Http\Controllers;
- 
- use App\Http\Requests; 
- use Artisan; 
- use Log; 
- use Storage; 
- use file; 
- 
+
+ use App\Http\Requests;
+ use Artisan;
+ use Log;
+ use Storage;
+ use file;
+
  class BackupController extends Controller {
-     
-public function index() 
-{   
-        $disk=Storage::disk(config("laravel-backup.backup.destination.disks")[0]); 
+
+public function index()
+{
+        $disk=Storage::disk(config("laravel-backup.backup.destination.disks")[0]);
         $files=$disk->
         files(config('laravel-backup.backup.name'));
-        $backups = []; 
+        $backups = [];
         // make an array of backup files, with their filesize and creation date .Laravel-blog
         foreach ($files as $k => $f) {
         // only take the zip files into account
@@ -29,7 +29,7 @@ public function index()
     }
     // reverse the backups, so the newest one would be on top
     $backups = array_reverse($backups);
- 
+
 
     //return view("admin/backup.backups")->with(compact('backups'));
     return view("admin/backup.backups")->with(compact('backups'));
@@ -38,14 +38,11 @@ public function index()
 public function create(){
 
  try {
- // start the backup process
- 
+
  Artisan::call('backup:run');
- /**/ $output = Artisan::output();
- /*/ log the results*
- /* Log::info("Backpack\BackupManager -- new backup started from admin interface \r\n" . $output);*/
- // return the results as a response to the ajax call
+ $output = Artisan::output();
  
+
  return redirect()->back();
  }
     catch (Exception $e) {
@@ -57,13 +54,13 @@ public function bk_onlyDb(){
 
  try {
  // start the backup process
-  
+
  Artisan::call('backup:run --only-db');
  /**/ $output = Artisan::output();
  /*/ log the results*
  /* Log::info("Backpack\BackupManager -- new backup started from admin interface \r\n" . $output);*/
  // return the results as a response to the ajax call
- 
+
  return redirect()->back();
  }
         catch (Exception $e) {
@@ -75,13 +72,13 @@ public function bk_onlyFiles(){
 
  try {
  // start the backup process
- 
+
  Artisan::call('backup:run --only-files');
  /**/ $output = Artisan::output();
  /*/ log the results*
  /* Log::info("Backpack\BackupManager -- new backup started from admin interface \r\n" . $output);*/
  // return the results as a response to the ajax call
- 
+
  return redirect(Route('backups')) ;
  }
     catch (Exception $e) {
@@ -97,8 +94,8 @@ public function bk_onlyFiles(){
 */
 public function download($file_name)
     {
- 
-        
+
+
     $file = config('laravel-backup.backup.name').'\\'. env('APP_NAME') . '/' . $file_name;
     $disk = Storage::disk(config('laravel-backup.backup.destination.disks')[0]);
     if ($disk->exists($file)) {
@@ -116,7 +113,7 @@ public function download($file_name)
     abort(404, "The backup file doesn't exist.");
     }
 }
- 
+
 
 /**
 * Deletes a backup file.

@@ -19,7 +19,6 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    @livewireStyles
 </head>
 
 <body>
@@ -29,23 +28,6 @@
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
                 </a>
-                <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                            aria-expanded="false">
-                            code
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{{ route('code') }}">Action</a>
-                            <a class="dropdown-item" href="{{ route('code.create') }}"> create</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                        </div>
-                    </li>
-
-                <a class="navbar-brand" href="{{ route('backups') }}">
-                    backup
-                </a>
-
                 <button class="navbar-toggler" type="button" data-toggle="collapse"
                     data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                     aria-label="{{ __('Toggle navigation') }}">
@@ -101,7 +83,6 @@
             @yield('content')
         </main>
     </div>
-    @livewireScripts
 </body>
 
 </html>

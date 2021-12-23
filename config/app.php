@@ -52,10 +52,13 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://localhost'),
+     'url' => env('APP_URL', 'http://localhost'),
 
+   /*this in local machine succes
     'asset_url' => env('ASSET_URL', null),
+    */
 
+      'asset_url' => url('/'),
     /*
     |--------------------------------------------------------------------------
     | Application Timezone

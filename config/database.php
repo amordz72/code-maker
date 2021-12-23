@@ -65,12 +65,12 @@ return [
 /*
 setting bakub Db
  */
-   'dump' => [
+         'dump' => [
             'dump_binary_path' => 'D:\\xampp\\mysql\\bin', // only the path, so without `mysqldump` or `pg_dump`
             'use_single_transaction',
             'timeout' => 60 * 5, // 5 minute timeout
         ],
-            
+
         ],
 
         'pgsql' => [
